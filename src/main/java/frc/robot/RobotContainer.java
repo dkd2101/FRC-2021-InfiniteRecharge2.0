@@ -8,10 +8,14 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+//import frc.robot.commands.ExampleCommand;
+//import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.DriveTrain;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -20,10 +24,11 @@ import edu.wpi.first.wpilibj2.command.Command;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  private static final String OIConstants = null;
+  private final DriveTrain drivetrain = new DriveTrain();
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final Joystick joystick1 = new Joystick(OIConstants.kJoystick1);
+  private final Joystick joystick2 = new Joystick(OIConstants.kJoystick2);
 
 
 
@@ -33,6 +38,10 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
+    drivetrain.setDefaultCommand(new RunCommand(
+        () -> drivetrain.setTank(Math.pow(-joystick1.getY(), 3), Math.pow(-joystick2.getY(), 3)), drivetrain));
+
   }
 
   /**
@@ -42,7 +51,12 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+      new JoystickButton(joystick1, 2).whenPushed(new setTank(double leftPower, double rightPower));
   }
+
+public Command getAutonomousCommand() {
+	return null;
+}
 
 
   /**
@@ -50,8 +64,9 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  /*public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
-  }
+  }*/
 }
+
