@@ -23,10 +23,14 @@ public class Drivetrain extends SubsystemBase {
     private TalonSRX rightLeader;
 
   public Drivetrain() {
-    leftFollower = new TalonSRX(Constants.kleftFollower);
-    leftLeader = new TalonSRX(Constants.kleftLeader);
-    rightFollower = new TalonSRX(Constants.krightFollower);
-    rightLeader = new TalonSRX(Constants.krightLeader);
+
+    leftFollower = new TalonSRX(Constants.RobotMap.kleftFollower);
+    leftLeader = new TalonSRX(Constants.RobotMap.kleftLeader);
+    rightFollower = new TalonSRX(Constants.RobotMap.krightFollower);
+    rightLeader = new TalonSRX(Constants.RobotMap.krightLeader);
+
+  
+
 
     //set motors to default
     leftFollower.configFactoryDefault();
