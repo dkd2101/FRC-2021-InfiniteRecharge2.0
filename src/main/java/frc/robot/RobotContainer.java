@@ -14,8 +14,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 //import frc.robot.commands.ExampleCommand;
 //import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Drivetrain;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -25,11 +26,12 @@ import frc.robot.subsystems.DriveTrain;
  */
 public class RobotContainer {
   private static final String OIConstants = null;
-  private final DriveTrain drivetrain = new DriveTrain();
+  private final Drivetrain drivetrain = new Drivetrain();
   // The robot's subsystems and commands are defined here...
-  private final Joystick joystick1 = new Joystick(OIConstants.kJoystick1);
-  private final Joystick joystick2 = new Joystick(OIConstants.kJoystick2);
-
+  private final Joystick joystick1 = new Joystick(Constants.OIConstants.kJoystick1);
+  private final Joystick joystick2 = new Joystick(Constants.OIConstants.kJoystick2);
+  private final static int leftPower = 0;
+  private final static int rightPower = 0;
 
 
   /**
@@ -51,7 +53,11 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-      new JoystickButton(joystick1, 2).whenPushed(new setTank(double leftPower, double rightPower));
+      new JoystickButton(joystick1, 2).whenPressed(
+        new StartEndCommand (
+          ()->drivetrain.setTank( leftPower, rightPower), 
+          ()->drivetrain.stop())
+      );
   }
 
 public Command getAutonomousCommand() {
