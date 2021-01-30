@@ -16,13 +16,13 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class DriveTrain extends SubsystemBase {
+public class Drivetrain extends SubsystemBase {
     private TalonSRX leftFollower;
     private TalonSRX leftLeader;
     private TalonSRX rightFollower;
     private TalonSRX rightLeader;
 
-  public DriveTrain() {
+  public Drivetrain() {
     leftFollower = new TalonSRX(Constants.kleftFollower);
     leftLeader = new TalonSRX(Constants.kleftLeader);
     rightFollower = new TalonSRX(Constants.krightFollower);
