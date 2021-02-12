@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -27,6 +28,7 @@ import frc.robot.subsystems.Drivetrain;
 public class RobotContainer {
   private static final String OIConstants = null;
   private final Drivetrain drivetrain = new Drivetrain();
+  private final Shooter shooter = new Shooter();
   // The robot's subsystems and commands are defined here...
   private final Joystick joystick1 = new Joystick(Constants.OIConstants.kJoystick1);
   private final Joystick joystick2 = new Joystick(Constants.OIConstants.kJoystick2);
@@ -42,7 +44,7 @@ public class RobotContainer {
     configureButtonBindings();
 
     drivetrain.setDefaultCommand(new RunCommand(
-        () -> drivetrain.setTank(Math.pow(-joystick1.getY(), 3), Math.pow(-joystick2.getY(), 3)), drivetrain));
+        () -> drivetrain.setTank(Math.pow(-joystick1.getY(), 3), Math.pow(joystick2.getY(), 3)), drivetrain));
 
   }
 
@@ -58,6 +60,11 @@ public class RobotContainer {
           ()->drivetrain.setTank( leftPower, rightPower), 
           ()->drivetrain.stop())
       );
+      new JoystickButton(joystick1, 1).whileHeld(
+        new StartEndCommand(
+          ()-> shooter.setPower(0.75),
+          ()-> shooter.stop())
+        );
   }
 
 public Command getAutonomousCommand() {
