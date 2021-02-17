@@ -23,6 +23,7 @@ public final class Constants {
         public static int krightFollower = 1;
         public static int krightLeader = 2;
         public static int kShooter = 5;
+        public static int kIntake = 6;
     }
 
     public static final class OIConstants{
