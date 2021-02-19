@@ -19,6 +19,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Shooter.Ramp;
+
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -30,6 +32,7 @@ public class RobotContainer {
   private static final String OIConstants = null;
   private final Drivetrain drivetrain = new Drivetrain();
   private final Shooter shooter = new Shooter();
+  //private final Ramp ramp =  new Ramp();
   private final Intake intake = new Intake();
   // The robot's subsystems and commands are defined here...
   private final Joystick joystick1 = new Joystick(Constants.OIConstants.kJoystick1);
@@ -66,6 +69,11 @@ public class RobotContainer {
         new StartEndCommand(
           ()-> shooter.setPower(0.75),
           ()-> shooter.stop())
+        );
+      new JoystickButton(joystick1, 1).whileHeld(
+        new StartEndCommand(
+          ()-> ramp.setRampPower(0.75),
+          ()-> ramp.stop())
         );
       new JoystickButton(joystick1, 3).whileHeld(
         new StartEndCommand(
