@@ -32,7 +32,7 @@ public class RobotContainer {
   private static final String OIConstants = null;
   private final Drivetrain drivetrain = new Drivetrain();
   private final Shooter shooter = new Shooter();
-  //private final Ramp ramp =  new Ramp();
+  private final Shooter.Ramp ramp =  new Ramp();
   private final Intake intake = new Intake();
   // The robot's subsystems and commands are defined here...
   private final Joystick joystick1 = new Joystick(Constants.OIConstants.kJoystick1);
@@ -70,7 +70,7 @@ public class RobotContainer {
           ()-> shooter.setPower(0.75),
           ()-> shooter.stop())
         );
-      new JoystickButton(joystick1, 1).whileHeld(
+      new JoystickButton(joystick1, 4).whileHeld(
         new StartEndCommand(
           ()-> ramp.setRampPower(0.75),
           ()-> ramp.stop())
