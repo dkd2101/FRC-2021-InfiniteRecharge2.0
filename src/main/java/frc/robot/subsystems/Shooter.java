@@ -39,36 +39,10 @@ public void stop(){
 
 public void setPower(double power){
   Shooter.set(ControlMode.PercentOutput, power);
+  
 }
 
-public class Ramp extends SubsystemBase{
-  private TalonSRX Ramp;
 
-  public Ramp() {
-    Ramp = new TalonSRX(Constants.RobotMap.kRamp);
-
-    //set motors to default
-    Ramp.configFactoryDefault();
-
-    //set if inverted
-    Ramp.setInverted(true);
-
-    //set deadban
-    Ramp.configNeutralDeadband(0);
-
-    //neutralMode to brake
-    Ramp.setNeutralMode(NeutralMode.Brake);
-}
-
-public void stop(){
-  Ramp.set(ControlMode.PercentOutput, 0);
-}
-
-public void setRampPower(double power){
-  Ramp.set(ControlMode.PercentOutput, power);
-}
-
-}
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
