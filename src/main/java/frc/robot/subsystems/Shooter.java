@@ -16,21 +16,30 @@ import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
   private TalonSRX Shooter;
+  private TalonSRX Shooter2;
 
   public Shooter() {
     Shooter = new TalonSRX(Constants.RobotMap.kShooter);
+    Shooter2 = new TalonSRX(Constants.RobotMap.kShooter2);
 
     //set motors to default
     Shooter.configFactoryDefault();
+    Shooter2.configFactoryDefault();
 
     //set if inverted
-    Shooter.setInverted(true);
+    Shooter.setInverted(false);
+    Shooter2.setInverted(true);
+
+    //set Shooter2 to follow Shooter
+    Shooter2.follow(Shooter);
 
     //set deadban
     Shooter.configNeutralDeadband(0);
+    Shooter2.configNeutralDeadband(0);
 
     //neutralMode to brake
     Shooter.setNeutralMode(NeutralMode.Brake);
+    Shooter2.setNeutralMode(NeutralMode.Brake);
 }
 
 public void stop(){
