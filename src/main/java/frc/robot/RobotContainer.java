@@ -72,8 +72,8 @@ public class RobotContainer {
         );
       new JoystickButton(joystick1, 4).whileHeld(
         new StartEndCommand(
-          ()-> ramp.setPower(0.75),
-          ()-> ramp.stop())
+          ()-> ramp.setPowerRamp(0.75),
+          ()-> ramp.stopRamp())
         );
       new JoystickButton(joystick1, 3).whileHeld(
         new StartEndCommand(

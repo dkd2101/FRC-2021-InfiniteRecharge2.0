@@ -26,6 +26,7 @@ public final class Constants {
         public static int kIntake = 6;
         public static int kRamp = 7;
         public static int kShooter2 = 8;
+        public static int kLifter = 9;
     }
 
     public static final class OIConstants{
