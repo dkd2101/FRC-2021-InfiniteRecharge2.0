@@ -19,6 +19,7 @@ public class Ramp extends SubsystemBase {
   
     public Ramp() {
       Ramp = new TalonSRX(Constants.RobotMap.kRamp);
+      
   
       //set motors to default
       Ramp.configFactoryDefault();
@@ -32,7 +33,7 @@ public class Ramp extends SubsystemBase {
       //neutralMode to brake
       Ramp.setNeutralMode(NeutralMode.Brake);
   }
-  
+
   public void stop(){
     Ramp.set(ControlMode.PercentOutput, 0);
   }
@@ -45,5 +46,38 @@ public class Ramp extends SubsystemBase {
     @Override
     public void periodic() {
       // This method will be called once per scheduler run
+    }
+  }
+
+  public class Lifter extends SubsystemBase{
+    private TalonSRX Lifter;
+
+    public Lifter(){
+      Lifter = new SparkMax(Constants.RobotMap.kLifter);
+
+      Lifter.configFactoryDefault();
+
+      Lifter.setInverted(true);
+  
+      //set deadban
+      Lifter.configNeutralDeadband(0);
+  
+      //neutralMode to brake
+      Lifter.setNeutralMode(NeutralMode.Brake);
+
+  public void stop(){
+    Lifter.set(ControlMode.PercentOutput, 0);
+  }
+  
+  public void setPower(double power){
+    Lifter.set(ControlMode.PercentOutput, power);
+  }
+  
+  
+    @Override
+    public void periodic() {
+      // This method will be called once per scheduler run
+    }
+  }
     }
   }
