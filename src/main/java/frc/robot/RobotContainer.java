@@ -75,6 +75,16 @@ public class RobotContainer {
           ()-> ramp.setPowerRamp(0.75),
           ()-> ramp.stopRamp())
         );
+      new JoystickButton(joystick2, 4).whileHeld(
+        new StartEndCommand(
+           ()-> ramp.setPowerLift(-0.5),
+           ()-> ramp.stopLift())
+        );
+      new JoystickButton(joystick2, 3).whileHeld(
+        new StartEndCommand(
+          ()-> ramp.setPowerLift(0.5),
+          ()-> ramp.stopLift())
+        );
       new JoystickButton(joystick1, 3).whileHeld(
         new StartEndCommand(
           ()-> intake.setVelocity(1000),
