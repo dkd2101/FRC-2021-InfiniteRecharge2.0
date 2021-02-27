@@ -28,7 +28,7 @@ public class Shooter extends SubsystemBase {
 
     //set if inverted
     Shooter.setInverted(false);
-    Shooter2.setInverted(true);
+    Shooter2.setInverted(false);
 
     //set Shooter2 to follow Shooter
     Shooter2.follow(Shooter);

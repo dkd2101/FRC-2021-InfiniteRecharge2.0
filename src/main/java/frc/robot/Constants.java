@@ -25,7 +25,7 @@ public final class Constants {
         public static int kShooter = 5;
         public static int kIntake = 6;
         public static int kRamp = 7;
-        public static int kShooter2;
+        public static int kShooter2 = 8;
     }
 
     public static final class OIConstants{
