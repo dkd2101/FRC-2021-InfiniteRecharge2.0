@@ -23,7 +23,7 @@ public class Drivetrain extends SubsystemBase {
     private TalonSRX rightLeader;
 
   public Drivetrain() {
-
+    //not correct
     leftFollower = new TalonSRX(Constants.RobotMap.kleftFollower);
     leftLeader = new TalonSRX(Constants.RobotMap.kleftLeader);
     rightFollower = new TalonSRX(Constants.RobotMap.krightFollower);
