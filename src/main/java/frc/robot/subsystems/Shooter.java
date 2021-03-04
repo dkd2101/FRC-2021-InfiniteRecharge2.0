@@ -42,6 +42,8 @@ public class Shooter extends SubsystemBase {
     Shooter2.setNeutralMode(NeutralMode.Brake);
 }
 
+//comands 
+
 public void stop(){
   Shooter.set(ControlMode.PercentOutput, 0);
 }
@@ -50,6 +52,8 @@ public void setPower(double power){
   Shooter.set(ControlMode.PercentOutput, power);
   
 }
+
+
 
 
   @Override
