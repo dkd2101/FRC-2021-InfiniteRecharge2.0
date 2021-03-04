@@ -11,32 +11,37 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 //import com.revrobotics.SparkMax;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.PWMTalonSRX;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 //import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
-    private TalonSRX leftFollower;
-    private TalonSRX leftLeader;
-    private TalonSRX rightFollower;
-    private TalonSRX rightLeader;
+
+    private SpeedController leftFollower;
+    private SpeedController leftLeader;
+    private SpeedController rightFollower;
+    private SpeedController rightLeader;
+    
+    public DifferentialDrive arcade;
+
+    private SpeedControllerGroup left; 
+    private SpeedControllerGroup right;  
 
   public Drivetrain() {
     //not correct
-    leftFollower = new TalonSRX(Constants.RobotMap.kleftFollower);
-    leftLeader = new TalonSRX(Constants.RobotMap.kleftLeader);
-    rightFollower = new TalonSRX(Constants.RobotMap.krightFollower);
-    rightLeader = new TalonSRX(Constants.RobotMap.krightLeader);
-
-  
-
-
-    //set motors to default
-    leftFollower.configFactoryDefault();
-    leftLeader.configFactoryDefault();
-    rightFollower.configFactoryDefault();
-    rightLeader.configFactoryDefault();
+    leftFollower = new WPI_TalonSRX(Constants.RobotMap.kleftFollower);
+    leftLeader = new WPI_TalonSRX(Constants.RobotMap.kleftLeader);
+    rightFollower = new WPI_TalonSRX(Constants.RobotMap.krightFollower);
+    rightLeader = new WPI_TalonSRX(Constants.RobotMap.krightLeader);
+    left = new SpeedControllerGroup(leftLeader, leftFollower);
+    right = new SpeedControllerGroup(rightLeader, rightFollower);
+    arcade = new DifferentialDrive(left, right);
 
     //set if inverted
     leftLeader.setInverted(false);
@@ -44,31 +49,20 @@ public class Drivetrain extends SubsystemBase {
     leftFollower.setInverted(false);
     rightFollower.setInverted(false);
 
-    //set motors to follow
-    leftFollower.follow(leftLeader);
-    rightFollower.follow(rightLeader);
 
-    //set deadban
-    leftFollower.configNeutralDeadband(0);
-    rightFollower.configNeutralDeadband(0);
 
-    //neutralMode to brake
-    leftFollower.setNeutralMode(NeutralMode.Brake);
-    rightFollower.setNeutralMode(NeutralMode.Brake);
-    leftLeader.setNeutralMode(NeutralMode.Brake);
-    rightLeader.setNeutralMode(NeutralMode.Brake);
-
-    }
+  }
     
-    public void stop(){
-      leftLeader.set(ControlMode.PercentOutput, 0);
-      rightLeader.set(ControlMode.PercentOutput, 0);
-    } 
+   public void arcadeDrive(double xSpeed, double zRotation, boolean squaredInputs){
+    arcade.arcadeDrive(xSpeed, zRotation, squaredInputs);
 
-    public void setTank(double leftPower, double rightPower){
-      leftLeader.set(ControlMode.PercentOutput, leftPower);
-      rightLeader.set(ControlMode.PercentOutput, rightPower);
-    }
+  }
+
+    public void stop(double xSpeed, double zRotation, boolean squaredInputs){
+    xSpeed = 0;
+    zRotation = 0;
+    squaredInputs = false;
+  }
 
   @Override
   public void periodic() {

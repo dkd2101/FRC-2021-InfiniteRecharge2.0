@@ -49,7 +49,9 @@ public class RobotContainer {
     configureButtonBindings();
 
     drivetrain.setDefaultCommand(new RunCommand(
-        () -> drivetrain.setTank(Math.pow(-joystick1.getY(), 3), Math.pow(joystick2.getY(), 3)), drivetrain));
+        () -> drivetrain.arcadeDrive(Math.pow(-joystick1.getY(), 3), Math.pow(joystick2.getY(), 3), true))
+        
+        );
 
   }
 
@@ -62,8 +64,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
       new JoystickButton(joystick1, 2).whenPressed(
         new StartEndCommand (
-          ()->drivetrain.setTank( leftPower, rightPower), 
-          ()->drivetrain.stop())
+          ()->drivetrain.arcadeDrive(.5, 0, false), 
+          ()->drivetrain.stop(0, 0, false))
       );
       new JoystickButton(joystick1, 1).whileHeld(
         new StartEndCommand(
