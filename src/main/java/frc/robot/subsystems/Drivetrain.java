@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 //import com.revrobotics.SparkMax;
@@ -16,21 +17,24 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 //import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
 
-    private SpeedController leftBack;
-    private SpeedController leftFront;
-    private SpeedController rightBack;
-    private SpeedController rightFront;
+  private final SpeedController leftBack;
+  private final SpeedController leftFront;
+  private final SpeedController rightBack;
+  private final SpeedController rightFront;
     
     public MecanumDrive mecanumDrive;
 
     private SpeedControllerGroup left; 
-    private SpeedControllerGroup right;  
+    private SpeedControllerGroup right;
+    
+    
 
   public Drivetrain() {
     //not correct
@@ -46,11 +50,16 @@ public class Drivetrain extends SubsystemBase {
     rightBack.setInverted(true);
 
 
+    mecanumDrive.setDeadband(0.04);
+   
+
+
   
     
    mecanumDrive = new MecanumDrive(leftBack, leftFront, rightBack, rightFront);
 
   }
+
 
 
   @Override
