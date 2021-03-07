@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+
 public class Drivetrain extends SubsystemBase {
 
   private final SpeedController leftBack;
@@ -49,14 +50,11 @@ public class Drivetrain extends SubsystemBase {
     leftBack.setInverted(true);
     rightBack.setInverted(true);
 
-
-    mecanumDrive.setDeadband(0.04);
-   
-
-
-  
     
    mecanumDrive = new MecanumDrive(leftBack, leftFront, rightBack, rightFront);
+
+
+   mecanumDrive.setDeadband(0.04);
 
   }
 
