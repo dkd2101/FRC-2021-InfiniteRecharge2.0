@@ -39,10 +39,10 @@ public class Drivetrain extends SubsystemBase {
     rightLeader.configFactoryDefault();
 
     //set if inverted
-    leftLeader.setInverted(false);
-    rightLeader.setInverted(false);
-    leftFollower.setInverted(false);
-    rightFollower.setInverted(false);
+    leftLeader.setInverted(true);
+    rightLeader.setInverted(true);
+    leftFollower.setInverted(true);
+    rightFollower.setInverted(true);
 
     //set motors to follow
     leftFollower.follow(leftLeader);

@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANDigitalInput;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -22,8 +23,10 @@ public class Ramp extends SubsystemBase {
    */
   private final TalonSRX Ramp;
   private final CANSparkMax Lifter;
-  
-  public Ramp() {
+
+  private final void CANDigitalInput (Lifter, 1, 1);
+
+   public Ramp() {
     Ramp = new TalonSRX(Constants.RobotMap.kRamp);
     Lifter = new CANSparkMax(Constants.RobotMap.kLifter, MotorType.kBrushless);
 
@@ -57,6 +60,10 @@ public class Ramp extends SubsystemBase {
 
   public void stopLift(){
     Lifter.set(0);
+  }
+
+  public void getLimitSwitch(){
+    Lifter.get();
   }
 
   @Override
