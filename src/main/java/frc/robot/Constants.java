@@ -18,10 +18,10 @@ package frc.robot;
 public final class Constants {
     
     public static final class RobotMap{
-        public static int kleftFollower = 4;
-        public static int kleftLeader = 3;
-        public static int krightFollower = 1;
-        public static int krightLeader = 2;
+        public static int kleftBack = 4;
+        public static int kleftFront = 3;
+        public static int krightBack = 1;
+        public static int krightFront = 2;
         public static int kShooter = 5;
         public static int kIntake = 6;
         public static int kRamp = 7;

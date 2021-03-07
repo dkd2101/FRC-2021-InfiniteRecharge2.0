@@ -10,59 +10,48 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 //import com.revrobotics.SparkMax;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import edu.wpi.first.wpilibj.PWMTalonSRX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 //import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
 
-    private SpeedController leftFollower;
-    private SpeedController leftLeader;
-    private SpeedController rightFollower;
-    private SpeedController rightLeader;
+    private SpeedController leftBack;
+    private SpeedController leftFront;
+    private SpeedController rightBack;
+    private SpeedController rightFront;
     
-    public DifferentialDrive arcade;
+    public MecanumDrive mecanumDrive;
 
     private SpeedControllerGroup left; 
     private SpeedControllerGroup right;  
 
   public Drivetrain() {
     //not correct
-    leftFollower = new WPI_TalonSRX(Constants.RobotMap.kleftFollower);
-    leftLeader = new WPI_TalonSRX(Constants.RobotMap.kleftLeader);
-    rightFollower = new WPI_TalonSRX(Constants.RobotMap.krightFollower);
-    rightLeader = new WPI_TalonSRX(Constants.RobotMap.krightLeader);
-    left = new SpeedControllerGroup(leftLeader, leftFollower);
-    right = new SpeedControllerGroup(rightLeader, rightFollower);
-    arcade = new DifferentialDrive(left, right);
+    leftBack = new WPI_TalonFX(Constants.RobotMap.kleftBack);
+    leftFront = new WPI_TalonFX(Constants.RobotMap.kleftFront);
+    rightBack = new WPI_TalonFX(Constants.RobotMap.krightBack);
+    rightFront = new WPI_TalonFX(Constants.RobotMap.krightFront);
 
     //set if inverted
-    leftLeader.setInverted(false);
-    rightLeader.setInverted(false);
-    leftFollower.setInverted(false);
-    rightFollower.setInverted(false);
+    leftFront.setInverted(true);
+    rightFront.setInverted(true);
+    leftBack.setInverted(true);
+    rightBack.setInverted(true);
 
 
-
-  }
+  
     
-   public void arcadeDrive(double xSpeed, double zRotation, boolean squaredInputs){
-    arcade.arcadeDrive(xSpeed, zRotation, squaredInputs);
+   mecanumDrive = new MecanumDrive(leftBack, leftFront, rightBack, rightFront);
 
   }
 
-    public void stop(double xSpeed, double zRotation, boolean squaredInputs){
-    xSpeed = 0;
-    zRotation = 0;
-    squaredInputs = false;
-  }
 
   @Override
   public void periodic() {

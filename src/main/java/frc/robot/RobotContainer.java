@@ -49,9 +49,8 @@ public class RobotContainer {
     configureButtonBindings();
 
     drivetrain.setDefaultCommand(new RunCommand(
-        () -> drivetrain.arcadeDrive(Math.pow(-joystick1.getY(), 3), Math.pow(joystick2.getY(), 3), true))
-        
-        );
+        () -> drivetrain.mecanumDrive.driveCartesian(-joystick1.getX(),joystick1.getY(),-joystick2.getX())
+        , drivetrain));
 
   }
 
@@ -62,11 +61,6 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-      new JoystickButton(joystick1, 2).whenPressed(
-        new StartEndCommand (
-          ()->drivetrain.arcadeDrive(.5, 0, false), 
-          ()->drivetrain.stop(0, 0, false))
-      );
       new JoystickButton(joystick1, 1).whileHeld(
         new StartEndCommand(
           ()-> shooter.setPower(joystick1.getZ()),
