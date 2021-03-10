@@ -85,7 +85,7 @@ public class RobotContainer {
         );
       new JoystickButton(joystick1, 3).whileHeld(
         new StartEndCommand(
-          ()-> intake.setVelocity(1000),
+          ()-> intake.setPower(.5),
           ()-> intake.stop())
         );
   }

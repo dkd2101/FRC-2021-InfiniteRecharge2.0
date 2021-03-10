@@ -17,31 +17,39 @@ import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
   private TalonSRX Intake;
+  private TalonSRX IntakeFollow;
 
   public Intake() {
     Intake = new TalonSRX(Constants.RobotMap.kIntake);
+    IntakeFollow = new TalonSRX(Constants.RobotMap.kIntakeFollow);
 
     //set motors to default
     Intake.configFactoryDefault();
+    IntakeFollow.configFactoryDefault();
 
     //set if inverted
     Intake.setInverted(false);
+    IntakeFollow.setInverted(false);
+
+    //follow
+    IntakeFollow.follow(Intake);
 
     //set deadban
     Intake.configNeutralDeadband(0);
+    IntakeFollow.configNeutralDeadband(0);
+
 
     //neutralMode to brake
     Intake.setNeutralMode(NeutralMode.Brake);
+    IntakeFollow.setNeutralMode(NeutralMode.Brake);
 }
 
 public void stop(){
   Intake.set(ControlMode.PercentOutput, 0);
 }
 
-public void setVelocity(double rpm) {
-  //Convert Revolutions per Minute (RPM) to Cycles per 100 milliseconds (cpm) for closed loop controller
-  double cpm = rpm * 600 / 8192; 
-  Intake.set(ControlMode.Velocity, cpm); 
+public void setPower(double power) { 
+  Intake.set(ControlMode.PercentOutput, 0); 
 }
 
   @Override
